@@ -1,0 +1,712 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/MyBlog/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/MyBlog/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/MyBlog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="-css -html," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/MyBlog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="有很多时候，我们都会用到浮动，而我们有时候对浮动只是一知半解，却不是太清楚它到底是怎么回事，不知道各位有没有和我一样的感觉，只知道用它，却不知道它到底是怎么回事，所以，在学习的过程中，就要把一个概念不是很清晰的问题把它弄清楚了，便于我们以后的使用。早些时候，W3C规定出来的浮动实际并不是为了布局所用，当时是为了做文字环绕才使用到浮动，后来有人发现用它来做布局也挺不错啊，但是，用到了浮动，是要付出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈CSS中的浮动和清除浮动">
+<meta property="og:url" content="https://blackmanbazhu.github.io/MyBlog/2016/10/27/fudong/index.html">
+<meta property="og:site_name" content="曲终人散。">
+<meta property="og:description" content="有很多时候，我们都会用到浮动，而我们有时候对浮动只是一知半解，却不是太清楚它到底是怎么回事，不知道各位有没有和我一样的感觉，只知道用它，却不知道它到底是怎么回事，所以，在学习的过程中，就要把一个概念不是很清晰的问题把它弄清楚了，便于我们以后的使用。早些时候，W3C规定出来的浮动实际并不是为了布局所用，当时是为了做文字环绕才使用到浮动，后来有人发现用它来做布局也挺不错啊，但是，用到了浮动，是要付出">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113331828-2012405825.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113641875-1308945222.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113735609-1971183107.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114326265-74408946.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114430140-826326551.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114549531-772114513.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114645265-1457696896.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114723734-558339430.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027122632359-1930368092.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123047625-596480805.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123128265-311136349.jpg">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123225500-1577490674.jpg">
+<meta property="og:updated_time" content="2016-10-27T07:23:29.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈CSS中的浮动和清除浮动">
+<meta name="twitter:description" content="有很多时候，我们都会用到浮动，而我们有时候对浮动只是一知半解，却不是太清楚它到底是怎么回事，不知道各位有没有和我一样的感觉，只知道用它，却不知道它到底是怎么回事，所以，在学习的过程中，就要把一个概念不是很清晰的问题把它弄清楚了，便于我们以后的使用。早些时候，W3C规定出来的浮动实际并不是为了布局所用，当时是为了做文字环绕才使用到浮动，后来有人发现用它来做布局也挺不错啊，但是，用到了浮动，是要付出">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113331828-2012405825.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","always":"expand for all pages automatically","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://blackmanbazhu.github.io/MyBlog/2016/10/27/fudong/"/>
+
+
+  <title> 浅谈CSS中的浮动和清除浮动 | 曲终人散。 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/MyBlog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">曲终人散。</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/MyBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/MyBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/MyBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/MyBlog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浅谈CSS中的浮动和清除浮动
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-27T15:15:21+08:00" content="2016-10-27">
+              2016-10-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/MyBlog/2016/10/27/fudong/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/fudong/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>有很多时候，我们都会用到浮动，而我们有时候对浮动只是一知半解，却不是太清楚它到底是怎么回事，不知道各位有没有和我一样的感觉，只知道用它，却不知道它到底是怎么回事，所以，在学习的过程中，就要把一个概念不是很清晰的问题把它弄清楚了，便于我们以后的使用。早些时候，W3C规定出来的浮动实际并不是为了布局所用，当时是为了做文字环绕才使用到浮动，后来有人发现用它来做布局也挺不错啊，但是，用到了浮动，是要付出一定的代价的，我们就必须要处理浮动所带来的影响。接下来我们就聊聊浮动的那些事儿，此分享仅供参考，有什么不足的地方希望各位博友指正！<br><a id="more"></a></p>
+<hr>
+<h2 id="首先我们要知道"><a href="#首先我们要知道" class="headerlink" title="首先我们要知道"></a>首先我们要知道</h2><p>css中的块级元素在页面中是独占一行的，自上而下排列，也就是我们所说的流，通常我们称之为标准流，在这里我以div为例，div是块级元素，如下图。<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113331828-2012405825.jpg" alt="此处输入图片的描述"></p>
+<p>可很清楚的看得到，div是独自占用一行的，div2和div3是不会排在div1后面，这是在标准流中的理论，但是，有些时候，我们的需求不仅仅是这样，我们想着如何在一行中显示多个div元素，所以，标准流已经不能满足我们的需求，这个时候我们就需要用到浮动，我们这样理解，浮动就是让这个div元素脱离标准流，漂浮在标准流的上面。现在，我给div2加上一个向左的浮动，给个fload：left；然后来看看会发生什么，看图吧，上效果低千言万语！<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113641875-1308945222.jpg" alt="此处输入图片的描述"></p>
+<p>  如图可以看出，黄色的div不见了，其实它并不是不见了，而是跑到了绿色盒子的下面，这个时候我们就要想到了，因为我们给了div2向左浮动，div2已经脱离了标准流，相当于它已经和黄色盒子、红色盒子不在一个层次上，所以，黄色盒子就会顶上去跑到绿色盒子的下面，占据着绿色盒子的位置，就是我们现在看到的效果。好，理解了上面的，让我们接着来，现在我给黄色盒子和绿色盒子都加上左浮动，再看看效果：</p>
+<p>  <img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027113735609-1971183107.jpg" alt="此处输入图片的描述"></p>
+<p>  现在我们看到div2和div3都脱离的标准流，此时，div3发现div2也是浮动的，所以div3就会跟随着div2之后，而div2发现上边的元素div1是标准流中的元素，因此div2的相对垂直位置不会改变，顶部仍然和div1元素的底部对齐，由于是左浮动，所以，左边的div2在最左边。</p>
+<h2 id="接下来我们来看看不同的："><a href="#接下来我们来看看不同的：" class="headerlink" title="接下来我们来看看不同的："></a>接下来我们来看看不同的：</h2><p>如果我把div2和div3都设置成右浮动的话，看图如下：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114326265-74408946.jpg" alt="此处输入图片的描述"></p>
+<p>  现在我们可以看到，div2和div3都漂浮到了最右边。但是有一点我们可以发现，因为是向右浮动，右边是最前，所以div2会第一个向右浮动，div3随着紧跟div后面向右浮动，这个时候就很容易的理解了，由于div1是在标准流上，它是独自占用一行的，所以div2和div3不会跑到上面去。<br>为了方便理解，让我们再看一个例子，如图：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114430140-826326551.jpg" alt="此处输入图片的描述"><br>现在我有四个div，现在他们分别没有浮动，都在标准流里，每个div独占一行，现在我给div2和div4分别加一个左浮动，然后给div3增加50px的宽度，便于理解，来看看效果：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114549531-772114513.jpg" alt="此处输入图片的描述"></p>
+<p>现在我们可以很好的理解上面的效果了，div2和div4都是左浮动的，先来理解div2 ，div2由于有左浮动，脱离了标准流，它发现div1是标准流里的元素，所了垂直位置不变，然后，div3发现div2是浮动的，它和我不在一个流中了，所以它的位置就空了，所以div3就顶了上去，现在来理解div4，div4也是向左浮动的，首先它看到div3向上顶了上去，所以div4也就跟着顶上，然而它是浮动的，但是它发现div3是标准流中的元素，所以它的垂直位置也不会有变化，如果没有div3的话，它的位置会紧跟div2的后面向左浮动的。</p>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>好了，只要理解了上面的东西，大概的浮动问题基本都可以解决了，不管页面多复杂，我们的初衷就是想让多个div或者是多个li标签在一行中显示，便于我们的布局需求，然而，满足我们的需求了，就会带来一些影响，就是浮动带来的影响，所以，我们在用到它的时候就要去解决浮动所带来的影响，也就是传说中的清除浮动。<br>首先，让我们来看看浮动会带来什么影响：</p>
+<h3 id="第一种影响和解决方法"><a href="#第一种影响和解决方法" class="headerlink" title="第一种影响和解决方法"></a>第一种影响和解决方法</h3><p>第一种：现在我有三个div，都属于标准流中，独占一行，如图所示：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114645265-1457696896.jpg" alt="此处输入图片的描述"></p>
+<p>然而，现在我的需求变了，我想让div1的右边是div2也就是让它们两个在同一行，然而div3的位置还是在下面，这个时候我们要是用到浮动了，给div1和div2添加一个向左浮动，就会出现问题，如图所示:<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027114723734-558339430.jpg" alt="此处输入图片的描述"></p>
+<p>问题就是div3发现它前面的两个div都脱离了标准流了，那也就是说它上面没有东西了，那我是不是应该顶上去，然而，这并不是我们想要的效果对吧，所以，现在我们就需要清除浮动了。清除浮动有三种种方法，在这里我先说第一种：<br>隔墙法，也就是在需要清除浮动的元素前面添加一个空的div，因为它没有浏览器默认样式，没有特殊功能，而且一般不会被css样式化，所以这种方法也是比较常见和常用的方法。<br>现在，也就是在div3前面添加一个空的div，给这个div添加一个css属性，clear：both； 代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  .clearfix&#123;</div><div class="line">        clear: both;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div class=&quot;box1&quot;&gt;div1&lt;/div&gt;</div><div class="line">  &lt;div class=&quot;box2&quot;&gt;div2&lt;/div&gt;</div><div class="line">  &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</div><div class="line">  &lt;div class=&quot;box3&quot;&gt;div3&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>这样的话就起到了清除浮动的效果，也就是让div3待在浮动元素的下面。效果如图：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027122632359-1930368092.jpg" alt="此处输入图片的描述"></p>
+<h3 id="第二种影响和解决方法"><a href="#第二种影响和解决方法" class="headerlink" title="第二种影响和解决方法"></a>第二种影响和解决方法</h3><p>现在我们来看看浮动给我带来的第二种影响：<br>现在看看我的HTML是怎么写的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    .box&#123;</div><div class="line">        background-color: yellow;</div><div class="line">    &#125;</div><div class="line">    .box1&#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background-color: green;</div><div class="line">    &#125;</div><div class="line">    .box2&#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background-color: red;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">    &lt;div class=&quot;box1&quot;&gt;div1&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;box2&quot;&gt;div2&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>来，先看看现在的效果：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123047625-596480805.jpg" alt="此处输入图片的描述"><br>大家注意，现在我是没有给外面的div高度的宽度的，我只是给了它的背景颜色是黄色，这种情况很容易理解嘛，因为它的子元素把它撑开了嘛，那现在我的需求变了，我想让div1和div2在同一行排列，那么，现在我就给div1和div2添加一个向左浮动，来看看会有什么效果:<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123128265-311136349.jpg" alt="此处输入图片的描述"><br>注意了，现在div1和div2都有了向左浮动，脱离了标准流，我们发现，原本外面包裹的div不见了，不理解的人这时候就很纳闷了，可能你在用的时候不会注意到，也有可能当时需求不一样，所以不能注意到这点，它是怎么回事呢，因为div1和div2都脱离了标准流，所以外面包裹的div没有支撑的东西， 也就是所谓的高度塌陷，那么，我们并不想让它呈现出这种效果，所以这个时候就要清楚浮动了，这里我就说第二种清楚浮动的方法，overflow方法，在父元素上设置overflow这个属性，如果父元素的这个属性设置为auto或者是hidden，父元素就会扩展包含浮动，这个方法有着比较好的语义性，因为它不需要额外的元素，但是，要记住一点，overflow属性不是为了清除浮动而定义的，要小心不要覆盖住内容或者触发了不需要的滚动条。<br>现在我就给外面的div添加overflow：hidden，或者是auto，<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    .box&#123;</div><div class="line">        background-color: yellow;</div><div class="line">         overflow:atuo;     /*或者是hidden*/</div><div class="line">    &#125;</div><div class="line">    .box1&#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background-color: green;</div><div class="line">    &#125;</div><div class="line">    .box2&#123;</div><div class="line">        width: 100px;</div><div class="line">        height: 100px;</div><div class="line">        background-color: red;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">    &lt;div class=&quot;box1&quot;&gt;div1&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;box2&quot;&gt;div2&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>看看效果吧：<br><img src="http://images2015.cnblogs.com/blog/1040790/201610/1040790-20161027123225500-1577490674.jpg" alt="此处输入图片的描述"><br>现在外面的div是不是又出来了。</p>
+<h3 id="第三种清除方法"><a href="#第三种清除方法" class="headerlink" title="第三种清除方法"></a>第三种清除方法</h3><p>不同的情况就需要不同的浮动清除办法，现在来说说第三种清除浮动的方法:<br>就是利用伪类元素来清除有浮动的标签，也就定义一个公共的类clearfix，给这个类添加css属性，在里面进行清除浮动的操作，光说没用，直接看代码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.clearfix:after&#123;</div><div class="line">    content:&quot;&quot;;</div><div class="line">    display:table;</div><div class="line">    height:0;</div><div class="line">    visibility:both;</div><div class="line">    clear:both;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix&#123;</div><div class="line">*zoom:1;    /* IE/7/6*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  这里把它写成公共的样式，只要哪里需要清除浮动，就在哪里添加一个清除浮动的类，比如上面的例子，我就给外面包着的div添加clearfix这个类，可以达到和上面同样的效果。这种方式这样理解，就是利用伪类元素，也就是在有浮动的标签前面添加一个块级元素，来达到效果。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">       .clearfix:after&#123;</div><div class="line">    content:&quot;&quot;;</div><div class="line">    display:table;</div><div class="line">    height:0;</div><div class="line">    visibility:both;</div><div class="line">    clear:both;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.clearfix&#123;</div><div class="line">*zoom:1;    /* IE/7/6*/</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;/style&gt; </div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;box clearfix&quot;&gt;</div><div class="line">    &lt;div class=&quot;box1&quot;&gt;div1&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;box2&quot;&gt;div2&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure></p>
+<p>以上就是我分享的css中的浮动和清除浮动所带来的影响，如有不足的地方，还请各位博友斧正！谢谢大家！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/MyBlog/tags/css-html/" rel="tag">#-css -html</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/MyBlog/2016/10/26/blog2/" rel="next" title="水月流长">
+                <i class="fa fa-chevron-left"></i> 水月流长
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/MyBlog/2016/10/28/angularJS基本概念/" rel="prev" title="初识angularJS的基本概念">
+                初识angularJS的基本概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%post.path%>" data-title="<%post.title%>" data-url="<%post.permalink%>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"zhuyj"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/MyBlog/uploads/my.jpg"
+               alt="朱永吉" />
+          <p class="site-author-name" itemprop="name">朱永吉</p>
+          <p class="site-description motion-element" itemprop="description">对于执着，我有另一种解释。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/MyBlog/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/MyBlog/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/blackmanbazhu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/bigboomshakalaka" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  微信
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先我们要知道"><span class="nav-number">1.</span> <span class="nav-text">首先我们要知道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来我们来看看不同的："><span class="nav-number">2.</span> <span class="nav-text">接下来我们来看看不同的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除浮动"><span class="nav-number">3.</span> <span class="nav-text">清除浮动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种影响和解决方法"><span class="nav-number">3.1.</span> <span class="nav-text">第一种影响和解决方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种影响和解决方法"><span class="nav-number">3.2.</span> <span class="nav-text">第二种影响和解决方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三种清除方法"><span class="nav-number">3.3.</span> <span class="nav-text">第三种清除方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱永吉</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/MyBlog/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/MyBlog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/MyBlog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/MyBlog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/MyBlog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/MyBlog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/MyBlog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/MyBlog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhuyj"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/MyBlog/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/MyBlog/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
